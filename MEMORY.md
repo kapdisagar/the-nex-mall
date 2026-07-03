@@ -1,0 +1,1 @@
+- [3D Implementation Approach](memory/nex-mall-3d-implementation.md) — Approach used for adding 3D animations to The Nex Mall website
