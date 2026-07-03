@@ -4,7 +4,7 @@ import { useRef, useState, useMemo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Environment, Bvh, useGLTF, Html } from "@react-three/drei";
 import * as THREE from "three";
-import { RotateCcw, ZoomIn, ZoomOut, Info } from "lucide-react";
+import { RotateCcw, ZoomIn, ZoomOut, Info, Heart, Star, ShoppingCart } from "lucide-react";
 
 // Product Model Component
 function ProductModel3D({
@@ -293,12 +293,9 @@ function ProductModel3D({
   // Create the model based on type
   const model = useMemo(() => createProductModel(), [modelType, color]);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (meshRef.current) {
-      // Auto-rotate when not being interacted with
-      if (!state.controls?.isDragging) {
-        meshRef.current.rotation.y += delta * 0.2;
-      }
+      meshRef.current.rotation.y += delta * 0.2;
     }
   });
 
@@ -524,7 +521,7 @@ export default function ProductViewer3D({
                     <Star
                       key={i}
                       size={16}
-                      className={i < Math.floor(product.rating) ? "fill-amber-400 text-amber-400" : "text-gray-300"}
+                      className={i < Math.floor(product.rating ?? 0) ? "fill-amber-400 text-amber-400" : "text-gray-300"}
                     />
                   ))}
                 </div>
