@@ -11,6 +11,7 @@ const categories = [
   { id: 8, name: "Service & More", slug: "service-more", icon: "🏪", description: "Additional services and offerings", image: "services" },
 ];
 
+const products = [
   // Fashion
   { id: 1, name: "Premium Cotton Formal Shirt", slug: "premium-cotton-formal-shirt", description: "Luxury cotton formal shirt", longDescription: "Experience the finest quality cotton formal shirt with a perfect blend of comfort and elegance. Made from 100% premium Egyptian cotton.", price: "2499", originalPrice: "3999", image: "/img/fashion-detail.png", categoryId: 1, inStock: true, rating: "4.5", reviews: 128, featured: true, isNew: true },
   { id: 2, name: "Designer Slim Fit Blazer", slug: "designer-slim-fit-blazer", description: "Premium tailored blazer for men", longDescription: "A perfectly tailored slim fit blazer crafted from Italian wool blend.", price: "5999", originalPrice: "8999", image: "/img/fashion-detail.png", categoryId: 1, inStock: true, rating: "4.7", reviews: 89, featured: true, isNew: false },
