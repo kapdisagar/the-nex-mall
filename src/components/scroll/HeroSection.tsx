@@ -8,15 +8,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const CATEGORIES = [
-  { name: "Fashion", emoji: "👗", color: "#0D9488" },
-  { name: "Bags", emoji: "👜", color: "#1E40AF" },
-  { name: "Footwear", emoji: "👟", color: "#7C3AED" },
-  { name: "Watches", emoji: "⌚", color: "#C8A96E" },
-  { name: "Beauty", emoji: "✨", color: "#EC4899" },
-  { name: "Gifts", emoji: "🎁", color: "#F59E0B" },
-  { name: "Jewellery", emoji: "💎", color: "#C8A96E" },
-  { name: "More", emoji: "🏪", color: "#6B7280" },
+  { name: "Fashion", icon: "👗", color: "#D4A843" },
+  { name: "Bags", icon: "👜", color: "#A8A8A8" },
+  { name: "Footwear", icon: "👟", color: "#7C3AED" },
+  { name: "Watches", icon: "⌚", color: "#D4A843" },
+  { name: "Beauty", icon: "✨", color: "#EC4899" },
+  { name: "Gifts", icon: "🎁", color: "#F59E0B" },
+  { name: "Jewellery", icon: "💎", color: "#F0C860" },
+  { name: "More", icon: "✦", color: "#6B7280" },
 ];
+
+const titleText = "THE NEX MALL";
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -28,6 +30,7 @@ export default function HeroSection() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollCueRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
+  const particleRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -35,114 +38,111 @@ export default function HeroSection() {
       const stage = stageRef.current;
       if (!section || !stage) return;
 
-      // ── Intro: title letters stagger in ──
       const chars = titleRef.current?.querySelectorAll(".char") ?? [];
-      gsap.set(chars, { y: 80, opacity: 0 });
+      gsap.set(chars, { y: 120, opacity: 0, rotateX: -30 });
       gsap.to(chars, {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        stagger: 0.04,
-        ease: "power3.out",
-        delay: 0.3,
+        y: 0, opacity: 1, rotateX: 0,
+        duration: 1.4, stagger: 0.035, ease: "power4.out", delay: 0.2,
       });
 
-      // subtitle + tagline fade in
       gsap.from([subtitleRef.current, taglineRef.current], {
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: "power2.out",
-        delay: 0.9,
+        y: 40, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power3.out", delay: 0.8,
       });
 
-      // CTA fade in
       gsap.from(ctaRef.current, {
-        y: 20,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.out",
-        delay: 1.4,
+        y: 30, opacity: 0, duration: 1, ease: "power3.out", delay: 1.4,
       });
 
-      // ── Scroll-driven timeline (pinned) ──
       const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.8,
-        },
+        scrollTrigger: { trigger: section, start: "top top", end: "bottom bottom", scrub: 1 },
       });
 
-      // Phase 1 (0–0.3): title zooms + fades, icons slide up
       tl.to(
         [titleRef.current, subtitleRef.current, taglineRef.current, ctaRef.current],
-        { scale: 1.06, opacity: 0, duration: 0.25 },
-        0
+        { scale: 1.08, opacity: 0, y: -40, duration: 0.3 }, 0
       ).to(
-        iconsRef.current,
-        { y: 0, opacity: 1, duration: 0.3 },
-        0.1
-      );
+        iconsRef.current, { y: 0, opacity: 1, duration: 0.35 }, 0.12
+      ).to(
+        glowRef.current, { opacity: 0.9, scale: 1.4, duration: 0.25 }, 0.3
+      ).to(glowRef.current, { opacity: 0.3, scale: 0.9, duration: 0.3 }, 0.55
+      ).to(stage, { opacity: 0, scale: 0.98, filter: "brightness(0.3)", duration: 0.3 }, 0.78);
 
-      // Phase 2 (0.3–0.7): icons hover, glow pulses
-      tl.to(
-        glowRef.current,
-        { opacity: 0.8, scale: 1.3, duration: 0.3 },
-        0.25
-      ).to(glowRef.current, { opacity: 0.4, scale: 1.0, duration: 0.3 }, 0.55);
-
-      // Phase 3 (0.7–1): everything fades to dark for transition
-      tl.to(stage, { opacity: 0, duration: 0.25 }, 0.8);
-
-      // Scroll cue fades out on any scroll
       gsap.to(scrollCueRef.current, {
-        opacity: 0,
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "+=200",
-          scrub: true,
-        },
+        opacity: 0, scrollTrigger: { trigger: section, start: "top top", end: "+=300", scrub: true },
       });
 
-      // Category icon individual floats
       const iconEls = iconsRef.current?.querySelectorAll(".cat-icon") ?? [];
       iconEls.forEach((el, i) => {
         gsap.to(el, {
-          y: -10,
-          duration: 1.8 + i * 0.15,
-          yoyo: true,
-          repeat: -1,
-          ease: "sine.inOut",
-          delay: i * 0.2,
+          y: -12, duration: 2 + i * 0.15, yoyo: true, repeat: -1, ease: "sine.inOut", delay: i * 0.15,
         });
       });
+
+      // Particle canvas animation
+      const canvas = particleRef.current;
+      if (!canvas) return;
+      const pctx = canvas.getContext("2d");
+      if (!pctx) return;
+      const particles: { x: number; y: number; vx: number; vy: number; s: number; o: number }[] = [];
+      let particleAnim: number;
+
+      const resize = () => {
+        canvas.width = window.innerWidth * devicePixelRatio;
+        canvas.height = window.innerHeight * devicePixelRatio;
+        canvas.style.width = "100vw";
+        canvas.style.height = "100vh";
+      };
+      resize();
+      window.addEventListener("resize", resize);
+
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          s: Math.random() * 2 + 0.5,
+          o: Math.random() * 0.4 + 0.1,
+        });
+      }
+
+      function drawParticles() {
+        if (!canvas || !pctx) return;
+        pctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
+          pctx.beginPath();
+          pctx.arc(p.x, p.y, p.s, 0, Math.PI * 2);
+          pctx.fillStyle = `rgba(212,168,67,${p.o})`;
+          pctx.fill();
+        });
+        particleAnim = requestAnimationFrame(drawParticles);
+      }
+      drawParticles();
+
+      return () => {
+        cancelAnimationFrame(particleAnim);
+        window.removeEventListener("resize", resize);
+      };
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  const titleText = "THE NEX MALL";
-
   return (
     <section ref={sectionRef} className="nex-hero-track">
+      <canvas ref={particleRef} className="nex-particles" />
       <div ref={stageRef} className="nex-hero-stage">
-        {/* Background image */}
         <div className="nex-hero-bg" />
-
-        {/* Glow blob */}
         <div ref={glowRef} className="nex-glow-blob" />
-
-        {/* Film grain overlay */}
         <div className="nex-grain" />
-
-        {/* Vignette */}
         <div className="nex-vignette" />
 
-        {/* Main title */}
         <div ref={titleRef} className="nex-hero-title" aria-label={titleText}>
           {titleText.split("").map((ch, i) => (
             <span key={i} className="char" style={{ display: "inline-block" }}>
@@ -156,35 +156,24 @@ export default function HeroSection() {
         </p>
 
         <p ref={taglineRef} className="nex-hero-tagline">
-          <span className="nex-gold">500+</span> Premium Brands &nbsp;·&nbsp;{" "}
+          <span className="nex-gold">500+</span> Premium Brands &nbsp;·&nbsp;
           <span className="nex-gold">8</span> Iconic Floors
         </p>
 
-        {/* CTA buttons */}
         <div ref={ctaRef} className="nex-hero-cta">
-          <Link href="/products" className="nex-btn-primary">
-            Explore Collection
-          </Link>
-          <Link href="#story" className="nex-btn-ghost">
-            Our Story
-          </Link>
+          <Link href="/products" className="nex-btn-primary">Explore Collection</Link>
+          <Link href="#story" className="nex-btn-ghost">Our Story</Link>
         </div>
 
-        {/* Category Icons — revealed on scroll */}
-        <div
-          ref={iconsRef}
-          className="nex-category-icons"
-          style={{ opacity: 0, transform: "translateY(40px)" }}
-        >
+        <div ref={iconsRef} className="nex-category-icons" style={{ opacity: 0, transform: "translateY(40px)" }}>
           {CATEGORIES.map((cat, i) => (
             <div key={i} className="cat-icon" style={{ "--cat-color": cat.color } as React.CSSProperties}>
-              <span className="cat-emoji">{cat.emoji}</span>
+              <span className="cat-emoji">{cat.icon}</span>
               <span className="cat-label">{cat.name}</span>
             </div>
           ))}
         </div>
 
-        {/* Scroll cue */}
         <div ref={scrollCueRef} className="nex-scroll-cue">
           <span>Scroll</span>
         </div>

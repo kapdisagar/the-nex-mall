@@ -9,15 +9,15 @@
 ═══════════════════════════════════════ */
 
 :root {
-  --bg:          #060608;
-  --bg2:         #0a0a0f;
-  --gold:        #C8A96E;
-  --gold-bright: #E8CC8A;
-  --gold-dim:    rgba(200,169,110,0.45);
-  --text:        #F0EDE8;
-  --text-dim:    rgba(240,237,232,0.52);
-  --text-dimmer: rgba(240,237,232,0.28);
-  --border:      rgba(240,237,232,0.08);
+  --bg:          #050505;
+  --bg2:         #0a0a0c;
+  --gold:        #D4A843;
+  --gold-bright: #F0C860;
+  --gold-dim:    rgba(212,168,67,0.12);
+  --text:        #EDEDEF;
+  --text-dim:    rgba(237,237,239,0.65);
+  --text-dimmer: rgba(237,237,239,0.35);
+  --border:      rgba(237,237,239,0.07);
 
   /* Original site vars (for non-homepage pages) */
   --color-primary: #3B82F6;
@@ -31,7 +31,15 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: auto; }
 
-/* Default body — light for product/category pages, force override dark mode */
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 4px; }
+
+/* Selection */
+::selection { background: rgba(212,168,67,0.25); color: var(--text); }
+
+/* Default body — light for product/category pages */
 body {
   background: #f9fafb !important;
   color: #1f2937;
@@ -41,7 +49,6 @@ body {
   color-scheme: light;
 }
 
-/* Override any Next.js dark mode injection on internal pages */
 @media (prefers-color-scheme: dark) {
   body:not(.nex-dark-body) {
     background: #f9fafb !important;
@@ -196,8 +203,8 @@ body {
   background-image: url('/img/hero-mall.png');
   background-size: cover;
   background-position: center;
-  opacity: 0.35;
-  filter: saturate(0.7) brightness(0.6);
+  opacity: 0.25;
+  filter: saturate(0.6) brightness(0.7) contrast(1.1);
 }
 
 /* Glow blob */
@@ -206,12 +213,22 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
+  width: 700px;
+  height: 700px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(200,169,110,0.18) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(212,168,67,0.12) 0%, transparent 70%);
   pointer-events: none;
   opacity: 0.5;
+}
+
+/* Particle canvas background */
+.nex-particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Film grain */
@@ -232,8 +249,8 @@ body {
   z-index: 3;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 75% at 50% 50%, transparent 45%, rgba(6,6,8,0.92) 100%),
-    linear-gradient(to bottom, rgba(6,6,8,0.6) 0%, transparent 20%, transparent 75%, rgba(6,6,8,0.9) 100%);
+    radial-gradient(ellipse 70% 75% at 50% 50%, transparent 45%, #050505 100%),
+    linear-gradient(to bottom, rgba(5,5,5,0.7) 0%, transparent 20%, transparent 75%, #050505 100%);
 }
 
 /* Hero title */
@@ -246,7 +263,7 @@ body {
   letter-spacing: -0.02em;
   line-height: 0.95;
   text-align: center;
-  background: linear-gradient(135deg, var(--text) 0%, var(--gold-bright) 50%, var(--text) 100%);
+  background: linear-gradient(135deg, var(--text) 0%, var(--gold-bright) 40%, var(--gold-bright) 60%, var(--text) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -364,7 +381,7 @@ body {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 2px;
-  background: rgba(200,169,110,0.15);
+  background: var(--gold-dim);
   z-index: 20;
 }
 .cf-progress-fill {
@@ -412,7 +429,7 @@ body {
 .cf-img-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, transparent 50%, var(--bg) 100%);
+  background: linear-gradient(to right, transparent 40%, var(--bg) 100%);
   z-index: 2;
 }
 
@@ -420,6 +437,11 @@ body {
   padding: 0 8vw 0 4vw;
   position: relative;
   z-index: 5;
+}
+
+/* Stitch sections together smoothly */
+section + section {
+  margin-top: -1px;
 }
 
 .cf-label {
@@ -528,7 +550,7 @@ body {
   text-align: center;
   padding: 22vh 7vw;
   background:
-    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(200,169,110,0.06) 0%, transparent 70%);
+    radial-gradient(ellipse 60% 50% at 50% 50%, var(--gold-dim) 0%, transparent 70%);
 }
 .bp-manifesto h2 {
   font-size: clamp(40px, 7.5vw, 120px);
@@ -569,7 +591,7 @@ body {
   gap: 6vw;
   text-align: center;
   padding: 12vh 5vw;
-  background: linear-gradient(135deg, rgba(200,169,110,0.04) 0%, transparent 100%);
+  background: linear-gradient(135deg, var(--gold-dim) 0%, transparent 100%);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -618,7 +640,7 @@ body {
   max-width: 1000px;
   margin: 0 auto;
   padding: 16vh 7vw;
-  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(200,169,110,0.05) 0%, transparent 70%);
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, var(--gold-dim) 0%, transparent 70%);
 }
 .bp-quote blockquote {
   font-family: 'Outfit', sans-serif;
@@ -667,7 +689,8 @@ body {
 .bp-footer {
   border-top: 1px solid var(--border);
   padding: 9vh 7vw 6vh;
-  background: var(--bg);
+  background: var(--bg2);
+  color: var(--text);
 }
 .bp-footer-cols {
   display: grid;
@@ -712,6 +735,12 @@ body {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-dimmer);
+}
+
+/* ── img-blend: melt image rectangles into dark bg ── */
+.img-blend {
+  -webkit-mask-image: radial-gradient(ellipse 88% 88% at 50% 50%, black 55%, transparent 100%);
+  mask-image: radial-gradient(ellipse 88% 88% at 50% 50%, black 55%, transparent 100%);
 }
 
 /* ── Old Tailwind vars (keep for other pages) ── */

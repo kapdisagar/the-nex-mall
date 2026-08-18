@@ -117,8 +117,8 @@ export default function ProductsPage() {
       {/* ── GLOBAL STYLES for this dark luxury page ── */}
       <style>{`
         .products-page {
-          background: #07070a;
-          color: #f0ede8;
+          background: #FFE2E2;
+          color: #1e1b1b;
           min-height: 100vh;
           font-family: 'Inter', 'Outfit', sans-serif;
         }
@@ -128,9 +128,9 @@ export default function ProductsPage() {
           position: fixed; top: 0; left: 0; right: 0; z-index: 90;
           display: flex; align-items: center; justify-content: space-between;
           padding: 16px 4vw;
-          background: rgba(7,7,10,0.82);
+          background: rgba(255,226,226,0.82);
           backdrop-filter: blur(16px);
-          border-bottom: 1px solid rgba(200,169,110,0.1);
+          border-bottom: 1px solid rgba(30,27,27,0.08);
           opacity: 0; pointer-events: none;
           transform: translateY(-10px);
           transition: opacity 0.4s ease, transform 0.4s ease;
@@ -138,21 +138,21 @@ export default function ProductsPage() {
         .prod-nav.nav-on { opacity: 1; pointer-events: auto; transform: none; }
         .prod-nav-mark {
           font-size: 12px; letter-spacing: 0.4em; text-indent: 0.4em;
-          color: #C8A96E; text-transform: uppercase; font-weight: 600;
+          color: #06B6D4; text-transform: uppercase; font-weight: 600;
           text-decoration: none;
         }
         .prod-nav-search {
           display: flex; align-items: center; gap: 10px;
-          background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(200,169,110,0.2);
+          background: rgba(0,0,0,0.04);
+          border: 1px solid rgba(15,23,42,0.12);
           border-radius: 100px;
           padding: 8px 18px;
         }
         .prod-nav-search input {
           background: none; border: none; outline: none;
-          color: #f0ede8; font-size: 13px; width: 200px;
+          color: #1f2937; font-size: 13px; width: 200px;
         }
-        .prod-nav-search input::placeholder { color: rgba(240,237,232,0.35); }
+        .prod-nav-search input::placeholder { color: rgba(15,23,42,0.4); }
 
         /* Hero */
         .products-hero {
@@ -163,55 +163,55 @@ export default function ProductsPage() {
         }
         .products-hero-img {
           position: absolute; inset: 0;
-          background: linear-gradient(135deg, #07070a 0%, #0f0e14 50%, #07070a 100%);
+          background: linear-gradient(135deg, #FFE2E2 0%, #BBF1D2 100%);
         }
-        .products-hero-img img { object-fit: cover; opacity: 0.45; }
+        .products-hero-img img { object-fit: cover; opacity: 0.15; }
         .products-hero-vignette {
           position: absolute; inset: 0;
-          background: radial-gradient(ellipse 70% 60% at 50% 40%, transparent 30%, #07070a 100%);
+          background: radial-gradient(ellipse 70% 60% at 50% 40%, transparent 30%, #FFE2E2 100%);
         }
         .products-hero-bottom {
           position: absolute; bottom: 0; left: 0; right: 0; height: 35%;
-          background: linear-gradient(to bottom, transparent, #07070a);
+          background: linear-gradient(to bottom, transparent, #FFE2E2);
         }
         .products-hero-content {
           position: relative; z-index: 2; text-align: center;
         }
         .products-hero-kicker {
           font-size: 11px; letter-spacing: 0.5em; text-transform: uppercase;
-          color: #C8A96E; margin-bottom: 20px;
+          color: #06B6D4; margin-bottom: 20px;
         }
         .products-hero-title {
           font-family: 'Outfit', sans-serif;
           font-size: clamp(52px, 9vw, 130px);
           font-weight: 800; letter-spacing: -0.04em;
           line-height: 0.92;
-          background: linear-gradient(135deg, #E8CC8A 0%, #C8A96E 50%, #a0834f 100%);
+          background: linear-gradient(135deg, #22D3EE 0%, #06B6D4 50%, #0891b2 100%);
           -webkit-background-clip: text; -webkit-text-fill-color: transparent;
           background-clip: text;
         }
         .products-hero-sub {
           margin-top: 18px; font-size: clamp(13px, 1.2vw, 16px);
-          color: rgba(240,237,232,0.48); letter-spacing: 0.1em;
+          color: rgba(15,23,42,0.6); letter-spacing: 0.1em;
         }
 
         /* Back link */
         .back-link {
           position: absolute; top: 28px; left: 4vw; z-index: 10;
           display: flex; align-items: center; gap: 8px;
-          color: rgba(240,237,232,0.5); text-decoration: none;
+          color: rgba(15,23,42,0.6); text-decoration: none;
           font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
           transition: color 0.3s;
         }
-        .back-link:hover { color: #C8A96E; }
+        .back-link:hover { color: #0D9488; }
 
         /* Category bar */
         .cat-bar {
           display: flex; align-items: center; gap: 8px;
           overflow-x: auto; padding: 0 4vw 0;
           scrollbar-width: none;
-          border-bottom: 1px solid rgba(240,237,232,0.07);
-          background: #07070a;
+          border-bottom: 1px solid rgba(30,27,27,0.08);
+          background: #FFE2E2;
           position: sticky; top: 0; z-index: 80;
         }
         .cat-bar::-webkit-scrollbar { display: none; }
@@ -220,14 +220,14 @@ export default function ProductsPage() {
           display: flex; align-items: center; gap: 6px;
           padding: 14px 20px;
           font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-          color: rgba(240,237,232,0.45);
+          color: rgba(15,23,42,0.55);
           border-bottom: 2px solid transparent;
           cursor: pointer; background: none; border-top: none; border-left: none; border-right: none;
           transition: color 0.25s, border-color 0.25s;
           white-space: nowrap;
         }
-        .cat-btn:hover { color: rgba(240,237,232,0.85); }
-        .cat-btn.active { color: #C8A96E; border-bottom-color: #C8A96E; }
+        .cat-btn:hover { color: rgba(15,23,42,0.85); }
+        .cat-btn.active { color: #0D9488; border-bottom-color: #0D9488; }
 
         /* Toolbar */
         .prod-toolbar {
@@ -237,33 +237,33 @@ export default function ProductsPage() {
         }
         .prod-count {
           font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
-          color: rgba(240,237,232,0.35);
+          color: rgba(15,23,42,0.45);
         }
         .sort-btn {
           display: flex; align-items: center; gap-6px;
           gap: 6px; padding: 10px 18px;
           font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
-          color: rgba(240,237,232,0.5);
-          border: 1px solid rgba(240,237,232,0.1);
+          color: rgba(15,23,42,0.6);
+          border: 1px solid rgba(15,23,42,0.12);
           border-radius: 100px; background: none; cursor: pointer;
           transition: all 0.25s;
           position: relative;
         }
-        .sort-btn:hover { color: #C8A96E; border-color: rgba(200,169,110,0.3); }
+        .sort-btn:hover { color: #0D9488; border-color: rgba(13,148,136,0.3); }
         .sort-dropdown {
           position: absolute; top: calc(100% + 8px); right: 0;
-          background: #111117; border: 1px solid rgba(200,169,110,0.2);
+          background: #ffffff; border: 1px solid rgba(15,23,42,0.12);
           border-radius: 12px; overflow: hidden;
-          min-width: 200px; z-index: 100;
+          min-width: 200px; z-index: 100; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
         .sort-option {
           display: block; padding: 12px 18px;
           font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
-          color: rgba(240,237,232,0.5); cursor: pointer;
+          color: rgba(15,23,42,0.6); cursor: pointer;
           transition: background 0.2s, color 0.2s;
         }
-        .sort-option:hover { background: rgba(200,169,110,0.1); color: #C8A96E; }
-        .sort-option.active { color: #C8A96E; }
+        .sort-option:hover { background: rgba(13,148,136,0.08); color: #0D9488; }
+        .sort-option.active { color: #0D9488; }
 
         /* Product grid */
         .prod-grid {
@@ -276,10 +276,10 @@ export default function ProductsPage() {
 
         /* Product card */
         .product-card {
-          background: #0d0d12;
-          border: 1px solid rgba(240,237,232,0.07);
+          background: #ffffff;
+          border: 1px solid rgba(15,23,42,0.06);
           border-radius: 16px; overflow: hidden;
-          cursor: pointer; text-decoration: none; color: inherit;
+          cursor: pointer; text-decoration: none; color: #1f2937;
           display: flex; flex-direction: column;
           opacity: 0; transform: translateY(32px);
           transition: opacity 0.7s cubic-bezier(.2,.6,.2,1),
@@ -287,13 +287,13 @@ export default function ProductsPage() {
                       border-color 0.3s, box-shadow 0.3s;
         }
         .product-card:hover {
-          border-color: rgba(200,169,110,0.3);
-          box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,169,110,0.15);
+          border-color: rgba(13,148,136,0.3);
+          box-shadow: 0 12px 30px rgba(0,0,0,0.04), 0 0 0 1px rgba(15,23,42,0.03);
           transform: translateY(-4px) !important;
         }
         .card-img-wrap {
           position: relative; height: 220px; overflow: hidden;
-          background: linear-gradient(135deg, #111117, #0a0a0f);
+          background: linear-gradient(135deg, #f8fafc, #f1f5f9);
           flex-shrink: 0;
         }
         .card-img-wrap img { object-fit: cover; transition: transform 0.6s ease; }
@@ -308,7 +308,7 @@ export default function ProductsPage() {
           display: flex; flex-direction: column; gap: 6px; z-index: 2;
         }
         .badge-new {
-          padding: 4px 10px; background: #C8A96E; color: #07070a;
+          padding: 4px 10px; background: #06B6D4; color: #03090e;
           font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
           text-transform: uppercase; border-radius: 100px;
         }
@@ -319,10 +319,10 @@ export default function ProductsPage() {
         .card-wish {
           position: absolute; top: 12px; right: 12px; z-index: 2;
           width: 34px; height: 34px; border-radius: 50%;
-          background: rgba(7,7,10,0.7); backdrop-filter: blur(8px);
-          border: 1px solid rgba(240,237,232,0.12);
+          background: rgba(255,255,255,0.85); backdrop-filter: blur(8px);
+          border: 1px solid rgba(15,23,42,0.08);
           display: flex; align-items: center; justify-content: center;
-          color: rgba(240,237,232,0.4); cursor: pointer;
+          color: rgba(15,23,42,0.45); cursor: pointer;
           opacity: 0; transition: opacity 0.3s, color 0.3s;
         }
         .product-card:hover .card-wish { opacity: 1; }
@@ -330,41 +330,41 @@ export default function ProductsPage() {
         .card-quick-add {
           position: absolute; bottom: 0; left: 0; right: 0;
           padding: 12px;
-          background: linear-gradient(to top, rgba(7,7,10,0.95), transparent);
+          background: linear-gradient(to top, rgba(255,255,255,0.95), transparent);
           transform: translateY(100%);
           transition: transform 0.35s cubic-bezier(.2,.6,.2,1);
         }
         .product-card:hover .card-quick-add { transform: translateY(0); }
         .quick-add-btn {
           width: 100%; padding: 10px;
-          background: #C8A96E; color: #07070a;
+          background: #0D9488; color: #ffffff;
           font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
           text-transform: uppercase; border: none; border-radius: 8px;
           cursor: pointer; display: flex; align-items: center;
           justify-content: center; gap: 8px; transition: background 0.25s;
         }
-        .quick-add-btn:hover { background: #E8CC8A; }
+        .quick-add-btn:hover { background: #0F766E; }
         .card-info { padding: 18px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
         .card-name {
           font-size: 14px; font-weight: 600; line-height: 1.4;
-          color: #f0ede8; letter-spacing: -0.01em;
+          color: #1f2937; letter-spacing: -0.01em;
           display: -webkit-box; -webkit-line-clamp: 2;
           -webkit-box-orient: vertical; overflow: hidden;
         }
         .card-stars { display: flex; align-items: center; gap: 5px; }
         .card-stars-row { display: flex; gap: 2px; }
-        .card-review-count { font-size: 11px; color: rgba(240,237,232,0.3); }
+        .card-review-count { font-size: 11px; color: rgba(15,23,42,0.5); }
         .card-price { display: flex; align-items: baseline; gap: 8px; margin-top: auto; }
-        .card-price-main { font-size: 18px; font-weight: 700; color: #E8CC8A; letter-spacing: -0.02em; }
-        .card-price-orig { font-size: 13px; color: rgba(240,237,232,0.3); text-decoration: line-through; }
+        .card-price-main { font-size: 18px; font-weight: 700; color: #0D9488; letter-spacing: -0.02em; }
+        .card-price-orig { font-size: 13px; color: rgba(15,23,42,0.4); text-decoration: line-through; }
 
         /* Empty */
         .prod-empty {
           text-align: center; padding: 16vh 4vw;
-          color: rgba(240,237,232,0.3);
+          color: rgba(15,23,42,0.4);
         }
         .prod-empty-icon { font-size: 64px; margin-bottom: 24px; }
-        .prod-empty-title { font-size: 24px; font-weight: 700; color: #f0ede8; margin-bottom: 10px; }
+        .prod-empty-title { font-size: 24px; font-weight: 700; color: #1f2937; margin-bottom: 10px; }
 
         /* Skeleton */
         .skeleton-grid {
@@ -373,17 +373,17 @@ export default function ProductsPage() {
           gap: 24px; padding: 0 4vw 16vh; max-width: 1500px; margin: 0 auto;
         }
         .skeleton-card {
-          background: #0d0d12; border: 1px solid rgba(240,237,232,0.05);
+          background: #ffffff; border: 1px solid rgba(15,23,42,0.06);
           border-radius: 16px; overflow: hidden;
         }
-        .skeleton-img { height: 220px; background: linear-gradient(90deg, #111117 25%, #1a1a22 50%, #111117 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+        .skeleton-img { height: 220px; background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
         .skeleton-body { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
-        .skeleton-line { height: 12px; border-radius: 6px; background: linear-gradient(90deg, #111117 25%, #1a1a22 50%, #111117 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+        .skeleton-line { height: 12px; border-radius: 6px; background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
         /* Section divider */
         .prod-divider {
-          width: 1px; height: 80px; background: linear-gradient(to bottom, transparent, rgba(200,169,110,0.4), transparent);
+          width: 1px; height: 80px; background: linear-gradient(to bottom, transparent, rgba(13,148,136,0.3), transparent);
           margin: 0 auto 8px;
         }
       `}</style>
@@ -393,7 +393,7 @@ export default function ProductsPage() {
         <nav ref={navRef} className="prod-nav">
           <Link href="/" className="prod-nav-mark">← The Nex Mall</Link>
           <div className="prod-nav-search">
-            <Search size={14} style={{ color: "rgba(200,169,110,0.6)" }} />
+            <Search size={14} style={{ color: "rgba(13,148,136,0.6)" }} />
             <input
               type="text"
               placeholder="Search products..."
@@ -453,11 +453,11 @@ export default function ProductsPage() {
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <div style={{
               display: "flex", alignItems: "center", gap: "8px",
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(240,237,232,0.1)",
+              background: "rgba(0,0,0,0.03)",
+              border: "1px solid rgba(15,23,42,0.12)",
               borderRadius: "100px", padding: "8px 16px"
             }}>
-              <Search size={13} style={{ color: "rgba(200,169,110,0.5)", flexShrink: 0 }} />
+              <Search size={13} style={{ color: "rgba(13,148,136,0.6)", flexShrink: 0 }} />
               <input
                 type="text"
                 placeholder="Search..."
@@ -465,7 +465,7 @@ export default function ProductsPage() {
                 onChange={(e) => setSearch(e.target.value)}
                 style={{
                   background: "none", border: "none", outline: "none",
-                  color: "#f0ede8", fontSize: "12px", width: "140px",
+                  color: "#1f2937", fontSize: "12px", width: "140px",
                   letterSpacing: "0.05em"
                 }}
               />
@@ -582,8 +582,8 @@ export default function ProductsPage() {
                             key={i}
                             size={10}
                             style={{
-                              fill: i < Math.floor(rating) ? "#C8A96E" : "transparent",
-                              color: i < Math.floor(rating) ? "#C8A96E" : "rgba(240,237,232,0.2)"
+                              fill: i < Math.floor(rating) ? "#06B6D4" : "transparent",
+                              color: i < Math.floor(rating) ? "#06B6D4" : "rgba(240,237,232,0.2)"
                             }}
                           />
                         ))}
@@ -608,7 +608,7 @@ export default function ProductsPage() {
         {!loading && filtered.length > 0 && (
           <div style={{ textAlign: "center", padding: "0 0 10vh" }}>
             <div className="prod-divider" />
-            <p style={{ fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(240,237,232,0.2)" }}>
+            <p style={{ fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(15,23,42,0.3)" }}>
               The Nex Mall · Premium Shopping
             </p>
           </div>

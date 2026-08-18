@@ -33,8 +33,8 @@ export default function HomePage() {
             <a href="#specs">Details</a>
             <a href="#gallery">Gallery</a>
           </div>
-          <a className="brandnav-cta" href="#reserve">
-            Visit Now
+          <a className="brandnav-cta" href="#story">
+            Explore
           </a>
         </nav>
 

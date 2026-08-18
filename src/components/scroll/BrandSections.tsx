@@ -29,13 +29,12 @@ export default function BrandSections() {
         entries.forEach((e) => {
           if (e.isIntersecting) e.target.classList.add("bp-in");
         }),
-      { threshold: 0.14 }
+      { threshold: 0.12 }
     );
-    containerRef.current
-      ?.querySelectorAll("[data-reveal]")
-      .forEach((el) => io.observe(el));
 
-    // Fallback for items above fold on jump
+    const els = containerRef.current?.querySelectorAll("[data-reveal]");
+    els?.forEach((el) => io.observe(el));
+
     const revealNow = () => {
       containerRef.current
         ?.querySelectorAll("[data-reveal]:not(.bp-in)")
@@ -48,12 +47,11 @@ export default function BrandSections() {
     window.addEventListener("scroll", revealNow, { passive: true });
     revealNow();
 
-    // Sticky nav logic (appears after hero)
     const nav = document.getElementById("brandnav");
     const hero = document.querySelector(".nex-hero-track") as HTMLElement | null;
     const onScroll = () => {
       const heroH = hero ? hero.offsetHeight : window.innerHeight * 3;
-      nav?.classList.toggle("brandnav-on", window.scrollY > heroH * 0.9);
+      nav?.classList.toggle("brandnav-on", window.scrollY > heroH * 0.88);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -66,7 +64,6 @@ export default function BrandSections() {
 
   return (
     <div ref={containerRef} className="bp-root">
-      {/* ── Manifesto ── */}
       <section className="bp bp-manifesto" id="story">
         <div data-reveal>
           <p className="bp-kicker">The Nex Mall</p>
@@ -74,7 +71,6 @@ export default function BrandSections() {
         </div>
       </section>
 
-      {/* ── Origin ── */}
       <section className="bp">
         <div className="bp-split">
           <div data-reveal>
@@ -85,17 +81,11 @@ export default function BrandSections() {
             </p>
           </div>
           <div data-reveal className="bp-img-wrap">
-            <Image
-              src="/img/mall-exterior.png"
-              alt="The Nex Mall exterior"
-              fill
-              className="bp-img object-cover"
-            />
+            <Image src="/img/mall-exterior.png" alt="The Nex Mall exterior" fill className="bp-img object-cover" />
           </div>
         </div>
       </section>
 
-      {/* ── Craft 01 — Fashion ── */}
       <section className="bp" id="craft">
         <div className="bp-split bp-flip">
           <div data-reveal>
@@ -106,17 +96,11 @@ export default function BrandSections() {
             </p>
           </div>
           <div data-reveal className="bp-img-wrap">
-            <Image
-              src="/img/fashion-detail.png"
-              alt="Fashion detail"
-              fill
-              className="bp-img object-cover"
-            />
+            <Image src="/img/fashion-detail.png" alt="Fashion detail" fill className="bp-img object-cover" />
           </div>
         </div>
       </section>
 
-      {/* ── Craft 02 — Jewellery ── */}
       <section className="bp">
         <div className="bp-split">
           <div data-reveal>
@@ -127,17 +111,11 @@ export default function BrandSections() {
             </p>
           </div>
           <div data-reveal className="bp-img-wrap">
-            <Image
-              src="/img/jewellery-detail.png"
-              alt="Jewellery"
-              fill
-              className="bp-img object-cover"
-            />
+            <Image src="/img/jewellery-detail.png" alt="Jewellery" fill className="bp-img object-cover" />
           </div>
         </div>
       </section>
 
-      {/* ── Stats ── */}
       <section className="bp">
         <div className="bp-stats">
           {STATS.map((s, i) => (
@@ -149,12 +127,9 @@ export default function BrandSections() {
         </div>
       </section>
 
-      {/* ── Specs ── */}
       <section className="bp bp-specs" id="specs">
         <div data-reveal>
-          <p className="bp-kicker" style={{ textAlign: "center" }}>
-            The Details
-          </p>
+          <p className="bp-kicker" style={{ textAlign: "center" }}>The Details</p>
           <table>
             <tbody>
               {SPECS.map((row, i) => (
@@ -168,7 +143,6 @@ export default function BrandSections() {
         </div>
       </section>
 
-      {/* ── Quote ── */}
       <section className="bp bp-quote">
         <div data-reveal>
           <blockquote>
@@ -178,11 +152,8 @@ export default function BrandSections() {
         </div>
       </section>
 
-      {/* ── Gallery ── */}
       <section className="bp" id="gallery">
-        <p data-reveal className="bp-kicker" style={{ marginBottom: "2rem" }}>
-          Gallery
-        </p>
+        <p data-reveal className="bp-kicker" style={{ marginBottom: "2rem" }}>Gallery</p>
         <div className="bp-gallery">
           <div data-reveal className="bp-g1 bp-img-wrap">
             <Image src="/img/hero-mall.png" alt="Mall interior" fill className="bp-img object-cover" />
@@ -199,7 +170,6 @@ export default function BrandSections() {
         </div>
       </section>
 
-      {/* ── CTA Band ── */}
       <section className="bp bp-ctaband" id="reserve">
         <div data-reveal>
           <h2>Your world,<br />waiting inside.</h2>
@@ -209,7 +179,6 @@ export default function BrandSections() {
         </div>
       </section>
 
-      {/* ── Footer ── */}
       <footer className="bp-footer">
         <div className="bp-footer-cols">
           <div>
@@ -241,7 +210,7 @@ export default function BrandSections() {
           </div>
         </div>
         <p className="bp-footer-fine">
-          © 2026 The Nex Mall. Premium Shopping Destination. All rights reserved.
+          &copy; 2026 The Nex Mall. Premium Shopping Destination. All rights reserved.
         </p>
       </footer>
     </div>

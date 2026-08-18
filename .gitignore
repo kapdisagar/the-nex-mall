@@ -38,3 +38,7 @@ memory/
 *.zip
 
 .vercel
+
+# Broken/placeholder asset (not a real PSD)
+public/001.psd
+
